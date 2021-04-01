@@ -43,7 +43,7 @@ def get_excel_content(file):
 
     return station_list, type_list, signal_list, distance_list
 
-file = r'E:\广州项目\计算在停车前的道岔信号机\修改版-测试用固定规则(下行普)1016.xlsx'
+file = r'E:\广州项目\计算在停车前的道岔信号机\修改版-测试用固定规则(下行快)1016.xlsx'
 station_list, type_list, signal_list, distance_list = get_excel_content(file)
 
 # station_standard_list = list(map(lambda x: {'station': x[0].split('-')[0], 'distance': x[3]}, list(filter(lambda x: x[1] == 8001, [x for x in zip(station_list, type_list, signal_list, distance_list)]))))
