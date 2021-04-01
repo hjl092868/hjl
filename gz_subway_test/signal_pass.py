@@ -43,7 +43,7 @@ def get_excel_content(file):
 
     return station_list, type_list, signal_list, distance_list
 
-file = r'E:\广州项目\计算在停车前的道岔信号机\修改版-测试用固定规则(下行快)1016.xlsx'
+file = r'E:\广州项目\计算在停车前的道岔信号机\修改版-测试用固定规则(上行快)1016.xlsx'
 station_list, type_list, signal_list, distance_list = get_excel_content(file)
 
 # station_standard_list = list(map(lambda x: {'station': x[0].split('-')[0], 'distance': x[3]}, list(filter(lambda x: x[1] == 8001, [x for x in zip(station_list, type_list, signal_list, distance_list)]))))
@@ -64,8 +64,8 @@ for station, type, signal, distance in zip(station_list, type_list, signal_list,
         continue
     # print('station_distance', station_distance)
     station_distance = station_distance[0]['distance']
-    # if type == 1001 and 0 < distance - station_distance < 30: #上行
-    if type == 1001 and 0 < station_distance - distance < 30: #下行
+    if type == 1001 and 0 < distance - station_distance < 30: #上行
+    # if type == 1001 and 0 < station_distance - distance < 30: #下行
         pass_list.append((station, type, signal, distance))
         list1 = pass_dict.get(station_code, [])
         # if (type, signal, distance) not in list1:
@@ -73,8 +73,8 @@ for station, type, signal, distance in zip(station_list, type_list, signal_list,
         if signal not in list1:
             list1.append(signal)
         pass_dict[station_code] = list1
-    # elif type == 1002 and 0 < distance - station_distance < 50: #上行
-    elif type == 1002 and 0 < station_distance - distance < 50: #下行
+    elif type == 1002 and 0 < distance - station_distance < 50: #上行
+    # elif type == 1002 and 0 < station_distance - distance < 50: #下行
         pass_list.append((station, type, signal, distance))
         list1 = pass_dict.get(station_code, [])
         # if (type, signal, distance) not in list1:
