@@ -46,8 +46,8 @@ def get_excel_content(file):
 file = r'E:\广州项目\计算在停车前的道岔信号机\修改版-测试用固定规则(上行普)1016.xlsx'
 station_list, type_list, signal_list, distance_list = get_excel_content(file)
 
-station_standard_list = list(map(lambda x: {'station': x[0].split('-')[0], 'distance': x[3]}, list(filter(lambda x: x[1] == 8001, [x for x in zip(station_list, type_list, signal_list, distance_list)]))))
-# station_standard_list = list(map(lambda x: {'station': x[0], 'distance': x[3]}, list(filter(lambda x: x[1] == 8001, [x for x in zip(station_list, type_list, signal_list, distance_list)]))))
+# station_standard_list = list(map(lambda x: {'station': x[0].split('-')[0], 'distance': x[3]}, list(filter(lambda x: x[1] == 8001, [x for x in zip(station_list, type_list, signal_list, distance_list)]))))
+station_standard_list = list(map(lambda x: {'station': x[0], 'distance': x[3]}, list(filter(lambda x: x[1] == 8001, [x for x in zip(station_list, type_list, signal_list, distance_list)]))))
 print('station_standard_list', station_standard_list)
 
 pass_list = []
@@ -55,9 +55,10 @@ pass_dict = {}
 for station, type, signal, distance in zip(station_list, type_list, signal_list, distance_list):
     if type not in [1001, 1002]:
         continue
-    station = station.split('-')[0]
     # station = station.split('-')[0]
-    station_code = CMCS_STATION_MAP[station]
+    station = station
+    # station_code = CMCS_STATION_MAP[station]
+    station_code = CMCS_STATION_MAP[station.split('-')[0]] + '-' +  CMCS_STATION_MAP[station.split('-')[1]]
     station_distance = list(filter(lambda x: x['station'] == station, station_standard_list))
     if not station_distance:
         continue
